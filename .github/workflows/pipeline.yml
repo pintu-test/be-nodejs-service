@@ -2,6 +2,9 @@ name: pipeline-nodejs-service
 on:
   push:
     branches: [ main ]
+env:
+  BRANCH: ${{ GITHUB.REF_NAME }}
+  ID: ${{ github.run.id }}
 jobs:
   build-and-test-service:
     runs-on: ubuntu-latest
@@ -34,7 +37,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.PROJECT }}:${{ GITHUB_REF_NAME }}-${{ GITHUB_RUN_ID }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.PROJECT }}:${{ env.BRANCH }}-${{ env.ID }}
   # build-and-push-image:
   #   runs-on: ubuntu-latest
   #   permissions:
