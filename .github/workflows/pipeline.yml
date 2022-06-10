@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 env:
   BRANCH: ${{ GITHUB.REF_NAME }}
-  ID: ${{ github.run.id }}
+  ID: ${{ GITHUB.RUN_ID }}
 jobs:
   build-and-test-service:
     runs-on: ubuntu-latest
